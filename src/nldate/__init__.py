@@ -5,16 +5,41 @@ import dateparser
 from dateutil.relativedelta import relativedelta
 
 _WEEKDAYS: dict[str, int] = {
-    "monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
-    "friday": 4, "saturday": 5, "sunday": 6,
+    "monday": 0,
+    "tuesday": 1,
+    "wednesday": 2,
+    "thursday": 3,
+    "friday": 4,
+    "saturday": 5,
+    "sunday": 6,
 }
 
 _WORD_TO_NUM: dict[str, int] = {
-    "a": 1, "an": 1, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
-    "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
-    "eleven": 11, "twelve": 12, "thirteen": 13, "fourteen": 14, "fifteen": 15,
-    "sixteen": 16, "seventeen": 17, "eighteen": 18, "nineteen": 19, "twenty": 20,
-    "thirty": 30, "forty": 40, "fifty": 50,
+    "a": 1,
+    "an": 1,
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10,
+    "eleven": 11,
+    "twelve": 12,
+    "thirteen": 13,
+    "fourteen": 14,
+    "fifteen": 15,
+    "sixteen": 16,
+    "seventeen": 17,
+    "eighteen": 18,
+    "nineteen": 19,
+    "twenty": 20,
+    "thirty": 30,
+    "forty": 40,
+    "fifty": 50,
 }
 
 _UNIT_PAT = r"(?:days?|weeks?|months?|years?)"
@@ -22,12 +47,17 @@ _UNIT_PAT = r"(?:days?|weeks?|months?|years?)"
 
 def _normalize(s: str) -> str:
     """Replace word numbers that precede a time unit with digits."""
+
     def _replace(m: re.Match[str]) -> str:
         return str(_WORD_TO_NUM[m.group(1).lower()])
 
     pattern = (
-        r"\b(" + "|".join(re.escape(w) for w in _WORD_TO_NUM) + r")"
-        + r"(?=\s+" + _UNIT_PAT + r")"
+        r"\b("
+        + "|".join(re.escape(w) for w in _WORD_TO_NUM)
+        + r")"
+        + r"(?=\s+"
+        + _UNIT_PAT
+        + r")"
     )
     return re.sub(pattern, _replace, s, flags=re.IGNORECASE)
 

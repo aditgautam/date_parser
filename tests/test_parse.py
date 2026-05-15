@@ -10,6 +10,7 @@ TODAY = date(2025, 3, 10)  # Monday
 
 # --- Absolute dates ---
 
+
 @pytest.mark.parametrize(
     ("text", "expected"),
     [
@@ -44,6 +45,7 @@ def test_partial_absolute_dates_prefer_first_day(text: str, expected: date) -> N
 
 # --- Relative: days ---
 
+
 @pytest.mark.parametrize(
     ("text", "expected"),
     [
@@ -68,6 +70,7 @@ def test_relative_days_weeks_and_word_numbers(text: str, expected: date) -> None
 
 
 # --- Relative: weeks / months / years ---
+
 
 @pytest.mark.parametrize(
     ("text", "expected"),
@@ -121,6 +124,7 @@ def test_offsets_can_use_nested_anchors(text: str, expected: date) -> None:
 
 # --- Weekday navigation ---
 
+
 @pytest.mark.parametrize(
     ("text", "expected"),
     [
@@ -153,6 +157,7 @@ def test_last_same_weekday_is_one_full_week_earlier() -> None:
 
 
 # --- Error handling ---
+
 
 @pytest.mark.parametrize(
     "text",
