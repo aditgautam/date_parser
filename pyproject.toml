@@ -7,7 +7,9 @@ authors = [
     { name = "Adit Gautam", email = "gautamadit@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "dateparser>=1.4.0",
+]
 
 [build-system]
 requires = ["uv_build>=0.11.8,<0.12.0"]
@@ -18,6 +20,7 @@ dev = [
     "mypy>=2.1.0",
     "pytest>=9.0.3",
     "ruff>=0.15.13",
+    "types-python-dateutil>=2.9.0.20260508",
 ]
 
 [tool.pytest.ini_options]
@@ -26,6 +29,10 @@ testpaths = ["tests"]
 [tool.mypy]
 strict = true
 files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["dateparser", "dateparser.*"]
+ignore_missing_imports = true
 
 [tool.ruff]
 src = ["src"]
